@@ -9,7 +9,7 @@ print("<html>")
 #print("<head>Something</head>")
 print("<body>")
 
-def order_creating(i, p, user_name, pass_word, pay_time):
+def order_creating(i, p, user_name, pass_word):
     result = ""
     guid = ""
 
@@ -57,7 +57,7 @@ def order_creating(i, p, user_name, pass_word, pay_time):
         # Перекодируем response_save_order в нужную нам кодировку (кириллица поломана)
         response_save_order.encoding = 'UTF-8'
 
-        print(response_save_order.text)
+        #print(response_save_order.text)
 
         # Распарсим полученый ответ для того, чтобы получить GUID только что созданного заказа.
         parsed_guid_nodes = ET.fromstring(response_save_order.content)
@@ -76,7 +76,7 @@ def order_creating(i, p, user_name, pass_word, pay_time):
     return result
 
 
-call_func = str(order_creating("127.0.0.1", "4545", "Admin", "1", "1"))
+call_func = str(order_creating("127.0.0.1", "4545", "Admin", "1"))
 
 print("Content-type: text/html")
 print()

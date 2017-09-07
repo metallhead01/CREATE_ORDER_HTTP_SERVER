@@ -10,7 +10,7 @@ print("<html>")
 #print("<head>Something</head>")
 print("<body>")
 
-def pay_order(i, p, user_name, pass_word, pay_time):
+def pay_order(i, p, user_name, pass_word):
 
     result = ""
     session = requests.session()
@@ -45,7 +45,7 @@ def pay_order(i, p, user_name, pass_word, pay_time):
         to_pay = str(attr_of_item_node.get('ToPaySum'))
 
     # время ожидания перед оплатой
-    time.sleep(int(pay_time))
+    #time.sleep(int(pay_time))
 
     xml_pay_string = ('<RK7Query><RK7CMD CMD="PayOrder"><Order guid="' + guid + '"/>'
                       '<Cashier code="9999"/><Station code="1"/><Payment id="1" amount="' +
@@ -68,7 +68,7 @@ def pay_order(i, p, user_name, pass_word, pay_time):
 
     return result
 
-call_func = pay_order("127.0.0.1", "4545", "Admin", "1", "1")
+call_func = pay_order("127.0.0.1", "4545", "Admin", "1")
 
 
 print("<h2>" + call_func + "</h2>")
