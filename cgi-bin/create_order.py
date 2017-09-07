@@ -1,12 +1,17 @@
-#!/usr/bin/env python3
+#!C:\Users\Rustam\AppData\Local\Programs\Python\Python36\python.exe
 
 import urllib3
 import requests
 import xml.etree.ElementTree as ET
 
+print("Content-type: text/html\r\n\r\n")
+print("<html>")
+#print("<head>Something</head>")
+print("<body>")
 
 def order_creating(i, p, user_name, pass_word, pay_time):
     result = ""
+    guid = ""
 
     session = requests.session()
 
@@ -48,12 +53,16 @@ def order_creating(i, p, user_name, pass_word, pay_time):
     # Распарсим полученый ответ для того, чтобы получить GUID только что созданного заказа.
     parsed_guid_nodes = ET.fromstring(response_save_order.content)
 
-    result = parsed_guid_nodes[0].attrib
+    for item in parsed_guid_nodes.findall("./Order"):
+        attr_of_item_node = (item.attrib)
+        guid = str(attr_of_item_node.get('guid'))
 
-    '''Обработаем возможное исключение при сохранении заказа'''
-    if parsed_guid_nodes.get('Status') != "Ok":
-        result = parsed_guid_nodes.get('ErrorText')
-        raise NameError(parsed_guid_nodes.get('ErrorText'))
+    parsed_create_order = parsed_guid_nodes.attrib
+    response_save_order.encoding = 'UTF-8'
+    if parsed_create_order.get('Status') != "Ok":
+        result = str(parsed_create_order.get('ErrorText'))
+    else:
+        result = "Order " + guid + " has been successfully created."
 
     return result
 
