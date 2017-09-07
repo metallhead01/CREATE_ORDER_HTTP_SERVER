@@ -16,7 +16,7 @@ def reg_waiter(i, p, user_name, pass_word):
 
     ip_string = 'https://' + i + ":" + p + '/rk7api/v0/xmlinterface.xml'
     # Регистрируем пользователя
-    xml_register_waiter_string = '<RK7Query><RK7CMD CMD="RegisterEmployee"> <Waiter code = "9999"/><Station code = "4"/></RK7CMD></RK7Query>'
+    xml_register_waiter_string = '<RK7Query><RK7CMD CMD="RegisterEmployee"> <Waiter code = "9999"/><Station code = "1"/></RK7CMD></RK7Query>'
     urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
     xml_unicode_register_waiter_string = xml_register_waiter_string.encode('utf-8')
 
