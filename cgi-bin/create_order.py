@@ -4,7 +4,7 @@ import urllib3
 import requests
 import xml.etree.ElementTree as ET
 
-print("Content-type: text/html\r\n\r\n")
+print("Content-type: text/html;charset=utf8\r\n\r\n")
 print("<html>")
 #print("<head>Something</head>")
 print("<body>")
@@ -34,7 +34,8 @@ def order_creating(i, p, user_name, pass_word, pay_time):
     parsed_create_order = parsed_ident_nodes.attrib
     # Проверяем возможность создания заказа - если статус что-нибудь, кроме "Ок" кидаем исключение.
     if parsed_create_order.get('Status') != "Ok":
-        raise NameError(parsed_create_order.get('ErrorText'))
+        result = parsed_create_order.get('ErrorText')
+        #raise NameError(parsed_create_order.get('ErrorText'))
     # Парсим ID визита
     visit_id = parsed_create_order.get('VisitID')
 
@@ -67,7 +68,7 @@ def order_creating(i, p, user_name, pass_word, pay_time):
     return result
 
 
-call_func = str(order_creating("127.0.0.1", "4545", "Admin_QSR", "190186", "2"))
+call_func = str(order_creating("127.0.0.1", "4545", "Admin_QSR", "190186", "1"))
 
 print("Content-type: text/html")
 print()

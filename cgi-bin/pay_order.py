@@ -5,7 +5,7 @@ import urllib3
 import requests
 import xml.etree.ElementTree as ET
 
-print("Content-type: text/html\r\n\r\n")
+print("Content-type: text/html;charset=utf8\r\n\r\n")
 print("<html>")
 #print("<head>Something</head>")
 print("<body>")
@@ -28,6 +28,12 @@ def pay_order(i, p, user_name, pass_word, pay_time):
     response_request_order.encoding = 'UTF-8'
     # Распарсим полученый ответ для того, чтобы получить GUID только что созданного заказа.
     parsed_guid_nodes = ET.fromstring(response_request_order.content)
+
+    '''Перебираем все ноды "Item" в прямой дочерней ноде "Dishes"'''
+    parsed_guid_order = parsed_guid_nodes.attrib
+    # Проверяем возможность создания заказа - если статус что-нибудь, кроме "Ок" кидаем исключение.
+    if parsed_guid_order.get('Status') != "Ok":
+        result = parsed_guid_order.get('ErrorText')
 
     guid = ''
     to_pay = ''
@@ -62,7 +68,7 @@ def pay_order(i, p, user_name, pass_word, pay_time):
 
     return result
 
-call_func = pay_order("127.0.0.1", "4545", "Admin_QSR", "190186", "2")
+call_func = pay_order("127.0.0.1", "4545", "Admin_QSR", "190186", "1")
 
 
 print("<h2>" + call_func + "</h2>")
