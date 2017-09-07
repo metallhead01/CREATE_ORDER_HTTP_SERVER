@@ -1,6 +1,6 @@
-#!C:\Users\Rustam\AppData\Local\Programs\Python\Python36\python.exe
+#!C:\Users\rusta\AppData\Local\Programs\Python\Python36\python.exe
 
-import cgitb; cgitb.enable()
+#import cgitb; cgitb.enable()
 import time
 import urllib3
 import requests
@@ -16,6 +16,7 @@ def pay_order(i, p, user_name, pass_word, pay_time):
 
     xml_unicode_request_string = xml_request_string.encode('utf-8')
     urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+    """
     response_request_order = session.request(method='POST', url=ip_string,
                                             data=xml_unicode_request_string,
                                             auth=(user_name, pass_word), verify=False)
@@ -54,10 +55,15 @@ def pay_order(i, p, user_name, pass_word, pay_time):
         result = str(parsed_pay_ok.get('ErrorText'))
     else:
         result = "Order " + guid + " has been successfully paid."
-    return result
+    """
+    #return result
 
 call_func = pay_order("127.0.0.1", "4545", "Admin_QSR", "190186", "2")
 
-print("Content-type: text/html;charset=utf-8\n\n")
-print()
+print("Content-type: text/html\r\n\r\n")
+print("<html>")
+#print("<head>Something</head>")
+print("<body>")
 print("<h1>Paid</h1>")
+print("</body>")
+print("</html>")
