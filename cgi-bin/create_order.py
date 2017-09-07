@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
-import time
 import urllib3
 import requests
 import xml.etree.ElementTree as ET
 
 
-
 def order_creating(i, p, user_name, pass_word, pay_time):
+    result = ""
+
     session = requests.session()
 
     ip_string = 'https://' + i + ":" + p + '/rk7api/v0/xmlinterface.xml'
@@ -17,7 +17,7 @@ def order_creating(i, p, user_name, pass_word, pay_time):
     '<RK7CMD CMD="CreateOrder"><Order><OrderType code= "1" /><Waiter code="9999"/><Table code= "4" /></Order></RK7CMD></RK7Query>')
 
     xml_unicode_request_string = xml_request_string.encode('utf-8')
-
+    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
     response_create_order = session.request(method='POST', url=ip_string,
                                             data=xml_unicode_request_string,
                                             auth=(user_name, pass_word), verify=False)
@@ -48,18 +48,18 @@ def order_creating(i, p, user_name, pass_word, pay_time):
     # Распарсим полученый ответ для того, чтобы получить GUID только что созданного заказа.
     parsed_guid_nodes = ET.fromstring(response_save_order.content)
 
+    result = parsed_guid_nodes[0].attrib
+
     '''Обработаем возможное исключение при сохранении заказа'''
     if parsed_guid_nodes.get('Status') != "Ok":
+        result = parsed_guid_nodes.get('ErrorText')
         raise NameError(parsed_guid_nodes.get('ErrorText'))
 
     return result
 
 
+call_func = str(order_creating("127.0.0.1", "4545", "Admin_QSR", "190186", "2"))
 
-result = order_creating("127.0.0.1", "4545", "Admin_QSR", "190186", "2")
-
-'''
 print("Content-type: text/html")
 print()
-print("<h2>" + result + "</h2>")
-'''
+print("<h2>" + call_func + "</h2>")
