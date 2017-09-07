@@ -41,7 +41,7 @@ def order_creating(i, p, user_name, pass_word, pay_time):
 
     xml_save_order = ('<RK7Query><RK7CMD CMD="SaveOrder" deferred="1" dontcheckLicense="1"><Order visit="' +
                       str(visit_id) + '" orderIdent="256" /><Session><Station code="4" />' +
-                      '<Creator code="9999"/><Dish id= "1000639" quantity= "2"></Dish></Session></RK7CMD></RK7Query>')
+                      '<Creator code="9999"/><Dish id= "1000259" quantity= "2"></Dish></Session></RK7CMD></RK7Query>')
 
     xml_save_order_string = xml_save_order.encode('utf-8')
     response_save_order = session.request(method='POST', url=ip_string, data=xml_save_order_string,
@@ -68,7 +68,7 @@ def order_creating(i, p, user_name, pass_word, pay_time):
     return result
 
 
-call_func = str(order_creating("127.0.0.1", "4545", "Admin_QSR", "190186", "1"))
+call_func = str(order_creating("127.0.0.1", "4545", "Admin", "1", "1"))
 
 print("Content-type: text/html")
 print()

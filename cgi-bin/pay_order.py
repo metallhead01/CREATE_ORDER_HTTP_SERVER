@@ -68,7 +68,7 @@ def pay_order(i, p, user_name, pass_word, pay_time):
 
     return result
 
-call_func = pay_order("127.0.0.1", "4545", "Admin_QSR", "190186", "1")
+call_func = pay_order("127.0.0.1", "4545", "Admin", "1", "1")
 
 
 print("<h2>" + call_func + "</h2>")
