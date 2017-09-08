@@ -49,7 +49,7 @@ def pay_order(i, p, user_name, pass_word):
 
     xml_pay_string = ('<RK7Query><RK7CMD CMD="PayOrder"><Order guid="' + guid + '"/>'
                       '<Cashier code="9999"/><Station code="1"/><Payment id="1" amount="' +
-                     to_pay+'"/></RK7CMD></RK7Query>')
+                     to_pay + '"/></RK7CMD></RK7Query>')
 
     xml_pay_string = xml_pay_string.encode('utf-8')
 

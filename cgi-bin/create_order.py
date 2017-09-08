@@ -49,7 +49,7 @@ def order_creating(i, p, user_name, pass_word):
 
         xml_save_order = ('<RK7Query><RK7CMD CMD="SaveOrder" deferred="1" dontcheckLicense="1"><Order visit="' +
                           str(visit_id) + '" orderIdent="256" /><Session><Station code="1" />' +
-                          '<Creator code="9999"/><Dish id= "1000259" quantity= "2"></Dish></Session></RK7CMD></RK7Query>')
+                          '<Creator code="9999"/><Dish id= "1000010" quantity= "2000"></Dish></Session></RK7CMD></RK7Query>')
 
         xml_save_order_string = xml_save_order.encode('utf-8')
         response_save_order = session.request(method='POST', url=ip_string, data=xml_save_order_string,
